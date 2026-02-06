@@ -37,6 +37,11 @@ ON od.OrderID=o.OrderID ## I used the table's identifier (orderid) to connect th
 23. MIN / MAX (COLUMN) - show me the min or max of the values in the column
 
   ### SUBQUERIES ,CTE. WINDOW FUNCTION
-24.SUBQUERIES - is a simple select query inside a select statement. you use it when you need : a filtered list, temporary result , a value calculated first. 
+24.SUBQUERIES - is a simple select query inside a select,from,where OR another subquery . you use it when you need : a filtered list, a temporary result , a value calculated first. 
+IN/NOT IN OPERATOR - used to determine if a value matches any value in a specific list of values or the results of a subquery
+E.G:  SELECT employee_id, department
+FROM employees
+WHERE department IN ('Sales', 'Marketing');
+
 25.CTE-CTE (Common Table Expression) CTE is just a named subquery
 26 WINDOW FUNCTIONS - are used for comparing rows (aggregated and non-aggregated) 
