@@ -89,8 +89,39 @@ DENSE_RANK() OVER (ORDER BY sales DESC) AS dr
 | C    | 200   | 2  |
 | D    | 100   | 3  |
 
+ Task - from the Northwind data set
 
+For each order, return:
+OrderID
+OrderDate
+net_revenue per order
+SUM(UnitPrice * Quantity * (1 - Discount))
+order_rank_of_day
+→ Rank orders within the same OrderDate by net_revenue
+→ Highest revenue = rank 1
+→ Ties should receive the same rank
+→ Next rank should skip numbers if there are ties
 
+SOLUTION:
 
+WITH TEMP_TABLE AS  ## first created CTE to use for the aggregation, that way, i can use WINDOW function to show 2 separate rows 
+( 
+SELECT 
+od.OrderID, o.OrderDate, 
+SUM(od.UnitPrice*od.Quantity*(1-od.Discount)) as net_revenue 
+
+FROM [Order Details] as od
+LEFT JOIN Orders as o
+ON od.OrderID=o.OrderID
+GROUP BY o.OrderDate, od.OrderID
+)
+SELECT 
+OrderID, OrderDate, net_revenue,
+RANK()OVER(PARTITION BY date(OrderDate) ORDER BY net_revenue DESC  
+) as RANK_net_revenue
+FROM TEMP_TABLE
+ORDER BY date(OrderDate),RANK_net_revenue, OrderID 
+
+note: date() clause is neccere
 
 
