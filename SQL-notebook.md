@@ -3,6 +3,20 @@ SQL NOTEBOOK
 I will use the Northwind data set, you can find it here: https://github.com/jpwhite3/northwind-SQLite3?tab=readme-ov-file
 The data set contains 13 Tables . I will be using SQLite v 3.7
 SQL’s logical order is: FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY
+SQL logical order of execution (→)
+
+CTE (WITH)
+→ FROM (incl. JOIN ... ON, subqueries in FROM)
+→ WHERE (row filtering, subqueries in WHERE)
+→ GROUP BY
+→ HAVING (group filtering, subqueries in HAVING)
+→ SELECT (expressions, aggregates, subqueries in SELECT)
+→ WINDOW functions (OVER(...))
+→ DISTINCT
+→ UNION / INTERSECT / EXCEPT
+→ ORDER BY
+→ LIMIT / OFFSET
+Rows → Groups → Values → Order → Cut
 
 
 1. SELECT - the columns you write here are the results SQL will show. when join is applied, sql execute join before the select, therefore, writing a select can be used for multiple Tables. 
